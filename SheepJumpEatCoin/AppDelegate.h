@@ -1,9 +1,6 @@
 //
 //  AppDelegate.h
-//  SheepJumpEatCoin
-//
-//  Created by irons on 2016/2/24.
-//  Copyright (c) 2016年 irons. All rights reserved.
+//  UberJump
 //
 
 #import <UIKit/UIKit.h>
@@ -12,6 +9,4 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-
 @end
-

@@ -1,9 +1,9 @@
 //
 //  main.m
-//  SheepJumpEatCoin
+//  Try_RabbitJump
 //
-//  Created by irons on 2016/2/24.
-//  Copyright (c) 2016年 irons. All rights reserved.
+//  Created by irons on 2015/8/6.
+//  Copyright (c) 2015年 irons. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
