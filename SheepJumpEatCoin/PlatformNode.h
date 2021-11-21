@@ -10,7 +10,6 @@ typedef NS_ENUM(int, PlatformType) {
 	PLATFORM_BREAK,
 };
 
-
 @interface PlatformNode : GameObjectNode
 
 @property (nonatomic, assign) PlatformType platformType;

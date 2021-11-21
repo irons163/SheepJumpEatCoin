@@ -445,6 +445,7 @@
 				TargetAttributes = {
 					B5E179661C7D5E1C0000C2C5 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = T6VV6T753H;
 					};
 					B5E1797F1C7D5E1C0000C2C5 = {
 						CreatedOnToolsVersion = 6.4;
@@ -457,6 +458,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -709,6 +711,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = T6VV6T753H;
 				INFOPLIST_FILE = SheepJumpEatCoin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -719,6 +722,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = T6VV6T753H;
 				INFOPLIST_FILE = SheepJumpEatCoin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -778,6 +782,7 @@
 				B5E1798C1C7D5E1C0000C2C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B5E1798D1C7D5E1C0000C2C5 /* Build configuration list for PBXNativeTarget "SheepJumpEatCoinTests" */ = {
 			isa = XCConfigurationList;
@@ -786,6 +791,7 @@
 				B5E1798F1C7D5E1C0000C2C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

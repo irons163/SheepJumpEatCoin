@@ -7,16 +7,14 @@
 
 @implementation GameObjectNode
 
-- (BOOL) collisionWithPlayer:(SKNode *)player
-{
-	return NO;
+- (BOOL)collisionWithPlayer:(SKNode *)player {
+    return NO;
 }
 
-- (void) checkNodeRemoval:(CGFloat)playerY
-{
-	if (playerY > self.position.y + 300.0f) {
-		[self removeFromParent];
-	}
+- (void)checkNodeRemoval:(CGFloat)playerY {
+    if (playerY > self.position.y + 300.0f) {
+        [self removeFromParent];
+    }
 }
 
 @end
