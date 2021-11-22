@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5656B2A274AB31B0056E494 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = B5656B29274AB31B0056E494 /* Player.m */; };
 		B5E1796D1C7D5E1C0000C2C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E1796C1C7D5E1C0000C2C5 /* main.m */; };
 		B5E179701C7D5E1C0000C2C5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E1796F1C7D5E1C0000C2C5 /* AppDelegate.m */; };
 		B5E179731C7D5E1C0000C2C5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E179721C7D5E1C0000C2C5 /* ViewController.m */; };
@@ -112,6 +113,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B5656B28274AB31B0056E494 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		B5656B29274AB31B0056E494 /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		B5E179671C7D5E1C0000C2C5 /* SheepJumpEatCoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepJumpEatCoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E1796B1C7D5E1C0000C2C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5E1796C1C7D5E1C0000C2C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -270,6 +273,8 @@
 				B5E179981C7D5ECD0000C2C5 /* Main.storyboard */,
 				B5E179991C7D5ECD0000C2C5 /* MyScene.h */,
 				B5E1799A1C7D5ECD0000C2C5 /* MyScene.m */,
+				B5656B28274AB31B0056E494 /* Player.h */,
+				B5656B29274AB31B0056E494 /* Player.m */,
 				B5E1799B1C7D5ECD0000C2C5 /* PlatformNode.h */,
 				B5E1799C1C7D5ECD0000C2C5 /* PlatformNode.m */,
 				B5E1799D1C7D5ECD0000C2C5 /* StarNode.h */,
@@ -581,6 +586,7 @@
 				B5E179A31C7D5ECD0000C2C5 /* GameState.m in Sources */,
 				B5E179A11C7D5ECD0000C2C5 /* EndGameScene.m in Sources */,
 				B5E179731C7D5E1C0000C2C5 /* ViewController.m in Sources */,
+				B5656B2A274AB31B0056E494 /* Player.m in Sources */,
 				B5E179A81C7D5ECE0000C2C5 /* PlatformNode.m in Sources */,
 				B5E179A91C7D5ECE0000C2C5 /* StarNode.m in Sources */,
 				B5E179701C7D5E1C0000C2C5 /* AppDelegate.m in Sources */,

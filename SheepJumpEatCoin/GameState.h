@@ -11,8 +11,10 @@
 @property (nonatomic, assign) int highScore;
 @property (nonatomic, assign) int stars;
 
+@property (assign) BOOL started;
+
 + (instancetype)sharedInstance;
 
-- (void) saveState;
+- (void)saveState;
 
 @end

@@ -12,6 +12,13 @@ typedef NS_ENUM(int, StarType) {
 
 @interface StarNode : GameObjectNode
 
-@property (nonatomic, assign) StarType starType;
++ (instancetype)node NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+- (id)initWithType:(StarType)type;
+
+@property (readonly, assign) StarType type;
+@property (nonatomic, assign) uint32_t categoryBitMask;
+@property (nonatomic, assign) uint32_t contactTestBitMask;
 
 @end

@@ -4,6 +4,7 @@
 #import <CoreMotion/CoreMotion.h>
 #import "EndGameScene.h"
 #import "GameState.h"
+#import "Player.h"
 
 typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     CollisionCategoryPlayer   = 0x1 << 0,
@@ -19,12 +20,9 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     SKNode *_hudNode;
     
     // Player
-    SKNode *_player;
+    Player *_player;
     // Tap To Start node
     SKSpriteNode *_tapToStartNode;
-    
-    // Height at which level ends
-    int _endLevelY;
     
     // Motion manager for accelerometer
     CMMotionManager *_motionManager;
@@ -35,12 +33,6 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     // Labels for score and stars
     SKLabelNode *_lblScore;
     SKLabelNode *_lblStars;
-    
-    // Max y reached by player
-    int _maxPlayerY;
-    
-    // Game over dude !
-    BOOL _gameOver;
 }
 
 @end
@@ -52,10 +44,8 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
         
         // Reset
-        _maxPlayerY = 80;
-        
         [GameState sharedInstance].score = 0;
-        _gameOver = NO;
+        [GameState sharedInstance].started = NO;
         
         // Create the game nodes
         // Background
@@ -84,7 +74,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
         NSDictionary *levelData = [NSDictionary dictionaryWithContentsOfFile:levelPlist];
         
         // Height at which the player ends the level
-        _endLevelY = [levelData[@"EndY"] intValue];
+        int endLevelY = [levelData[@"EndY"] intValue];
         
         // Add the platforms
         NSDictionary *platforms = levelData[@"Platforms"];
@@ -130,7 +120,10 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
         }
         
         // Add the player
-        _player = [self createPlayer];
+        _player = [[Player alloc] init];
+        _player.goalLineY = endLevelY;
+        _player.categoryBitMask = CollisionCategoryPlayer;
+        _player.contactTestBitMask = CollisionCategoryStar | CollisionCategoryPlatform;
         [_foregroundNode addChild:_player];
         
         // Tap to Start
@@ -210,79 +203,26 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     return backgroundNode;
 }
 
-- (SKNode *)createPlayer {
-    SKNode *playerNode = [SKNode node];
-    [playerNode setPosition:CGPointMake(160.0f, 80.0f)];
-    
-    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"sheep_jump1"];
-    sprite.size = CGSizeMake(50, 50);
-    [playerNode addChild:sprite];
-    
-    // 1
-    playerNode.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width/2];
-    // 2
-    playerNode.physicsBody.dynamic = NO;
-    // 3
-    playerNode.physicsBody.allowsRotation = NO;
-    // 4
-    playerNode.physicsBody.restitution = 1.0f;
-    playerNode.physicsBody.friction = 0.0f;
-    playerNode.physicsBody.angularDamping = 0.0f;
-    playerNode.physicsBody.linearDamping = 0.0f;
-    
-    // 1
-    playerNode.physicsBody.usesPreciseCollisionDetection = YES;
-    // 2
-    playerNode.physicsBody.categoryBitMask = CollisionCategoryPlayer;
-    // 3
-    playerNode.physicsBody.collisionBitMask = 0;
-    // 4
-    playerNode.physicsBody.contactTestBitMask = CollisionCategoryStar | CollisionCategoryPlatform;
-    
-    return playerNode;
-}
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     // 1
     // If we're already playing, ignore touches
-    if (_player.physicsBody.dynamic) return;
+    if ([GameState sharedInstance].started) return;
+    
+    [GameState sharedInstance].started = true;
     
     // 2
     // Remove the Tap to Start node
     [_tapToStartNode removeFromParent];
     
-    // 3
-    // Start the player by putting them into the physics simulation
-    _player.physicsBody.dynamic = YES;
-    // 4
-    [_player.physicsBody applyImpulse:CGVectorMake(0.0f, 20.0f)];
+    [_player startjumping];
 }
 
 - (StarNode *)createStarAtPosition:(CGPoint)position ofType:(StarType)type {
     // 1
-    StarNode *node = [StarNode node];
+    StarNode *node = [[StarNode alloc] initWithType:type];
     [node setPosition:position];
     [node setName:@"NODE_STAR"];
-    
-    // 2
-    [node setStarType:type];
-    SKSpriteNode *sprite;
-    if (type == STAR_SPECIAL) {
-        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"StarSpecial"];
-    } else {
-        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Star"];
-    }
-    [node addChild:sprite];
-    
-    // 3
-    node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width/2];
-    
-    // 4
-    node.physicsBody.dynamic = NO;
-    
-    node.physicsBody.categoryBitMask = CollisionCategoryStar;
-    node.physicsBody.collisionBitMask = 0;
-    node.physicsBody.contactTestBitMask = 0;
+    node.categoryBitMask = CollisionCategoryStar;
     
     return node;
 }
@@ -357,23 +297,14 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 
 - (void)update:(CFTimeInterval)currentTime {
     
-    if (_gameOver) return;
+    if (![GameState sharedInstance].started) return;
     
-    // New max height ?
-    // 1
-    if ((int)_player.position.y > _maxPlayerY) {
+    [_player updateStatus];
+    
+    if (!_player.isDroping) {
         // 2
-        [GameState sharedInstance].score += (int)_player.position.y - _maxPlayerY;
-        // 3
-        _maxPlayerY = (int)_player.position.y;
-        // 4
+        [GameState sharedInstance].score += (int)_player.position.y - _player.maxPlayerY;
         [_lblScore setText:[NSString stringWithFormat:@"%d", [GameState sharedInstance].score]];
-    }
-    
-    if (_player.position.y < (_maxPlayerY)) {
-        ((SKSpriteNode *)_player.children.firstObject).texture = [SKTexture textureWithImageNamed:@"sheep_jump3"];
-    } else {
-        ((SKSpriteNode *)_player.children.firstObject).texture = [SKTexture textureWithImageNamed:@"sheep_jump1"];
     }
     
     // Remove game objects that have passed by
@@ -393,13 +324,13 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     
     // 1
     // Check if we've finished the level
-    if (_player.position.y > _endLevelY) {
+    if (_player.arrivedGoalLine) {
         [self endGame];
     }
     
     // 2
     // Check if we've fallen too far
-    if (_player.position.y < (_maxPlayerY - 400)) {
+    if (_player.lostLife) {
         [self endGame];
     }
 }
@@ -407,13 +338,13 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 - (void)didSimulatePhysics {
     // 1
     // Set velocity based on x-axis acceleration
-    _player.physicsBody.velocity = CGVectorMake(_xAcceleration * 400.0f, _player.physicsBody.velocity.dy);
+    [_player updateVelocityXwithXAcceleration:_xAcceleration];
     
     // 2
     // Check x bounds
     if (_player.position.x < -20.0f) {
-        _player.position = CGPointMake(340.0f, _player.position.y);
-    } else if (_player.position.x > 340.0f) {
+        _player.position = CGPointMake(self.size.width - 20, _player.position.y);
+    } else if (_player.position.x > self.size.width - 20) {
         _player.position = CGPointMake(-20.0f, _player.position.y);
     }
     return;
@@ -421,7 +352,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 
 - (void)endGame {
     // 1
-    _gameOver = YES;
+    [GameState sharedInstance].started = NO;
     
     // 2
     // Save stars and high score

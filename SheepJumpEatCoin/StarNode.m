@@ -16,13 +16,38 @@
 
 @implementation StarNode
 
-- (id)init {
+- (id)initWithType:(StarType)type {
     if (self = [super init]) {
-        // Sound for when we collect a Star
-        _starSound = [SKAction playSoundFileNamed:@"StarPing.wav" waitForCompletion:NO];
+        _type = type;
+        [self setup];
     }
     
     return self;
+}
+
+- (void)setup {
+    // Sound for when we collect a Star
+    _starSound = [SKAction playSoundFileNamed:@"StarPing.wav" waitForCompletion:NO];
+    
+    // 2
+//    [self setStarType:_type];
+    SKSpriteNode *sprite;
+    if (_type == STAR_SPECIAL) {
+        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"StarSpecial"];
+    } else {
+        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Star"];
+    }
+    [self addChild:sprite];
+    
+    // 3
+    self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width/2];
+    
+    // 4
+    self.physicsBody.dynamic = NO;
+    
+//    self.physicsBody.categoryBitMask = CollisionCategoryStar;
+    self.physicsBody.collisionBitMask = 0;
+    self.physicsBody.contactTestBitMask = 0;
 }
 
 - (BOOL)collisionWithPlayer:(SKNode *)player {
@@ -36,14 +61,30 @@
     [self removeFromParent];
     
     // Award score
-    [GameState sharedInstance].score += (_starType == STAR_NORMAL ? 20 : 100);
+    [GameState sharedInstance].score += (_type == STAR_NORMAL ? 20 : 100);
     
     // Award stars
-    [GameState sharedInstance].stars += (_starType == STAR_NORMAL ? 1 : 5);
+    [GameState sharedInstance].stars += (_type == STAR_NORMAL ? 1 : 5);
     
     // The HUD needs updating to show the new stars and score
     return YES;
     
+}
+
+- (uint32_t)categoryBitMask {
+    return self.physicsBody.categoryBitMask;
+}
+
+- (void)setCategoryBitMask:(uint32_t)categoryBitMask {
+    self.physicsBody.categoryBitMask = categoryBitMask;
+}
+
+- (uint32_t)contactTestBitMask {
+    return self.physicsBody.contactTestBitMask;
+}
+
+- (void)setContactTestBitMask:(uint32_t)contactTestBitMask {
+    self.physicsBody.contactTestBitMask = contactTestBitMask;
 }
 
 @end
