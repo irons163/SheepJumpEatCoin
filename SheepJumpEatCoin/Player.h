@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Player : SKNode
 
-@property int maxPlayerY; // Max y reached by player
-@property int goalLineY; // Height at which level ends
+@property NSInteger maxPlayerY; // Max y reached by player
+@property NSInteger goalLineY; // Height at which level ends
 @property (nonatomic, assign) uint32_t categoryBitMask;
 @property (nonatomic, assign) uint32_t contactTestBitMask;
 

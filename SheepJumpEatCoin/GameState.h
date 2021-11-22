@@ -7,9 +7,9 @@
 
 @interface GameState : NSObject
 
-@property (nonatomic, assign) int score;
-@property (nonatomic, assign) int highScore;
-@property (nonatomic, assign) int stars;
+@property (nonatomic, assign) NSInteger score;
+@property (nonatomic, assign) NSInteger highScore;
+@property (nonatomic, assign) NSInteger stars;
 
 @property (assign) BOOL started;
 

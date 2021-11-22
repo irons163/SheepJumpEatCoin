@@ -20,7 +20,7 @@
         lblStars.fontColor = [SKColor whiteColor];
         lblStars.position = CGPointMake(50, self.size.height - 40);
         lblStars.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
-        [lblStars setText:[NSString stringWithFormat:@"X %d", [GameState sharedInstance].stars]];
+        [lblStars setText:[NSString stringWithFormat:@"X %ld", [GameState sharedInstance].stars]];
         [self addChild:lblStars];
         
         // Score
@@ -29,7 +29,7 @@
         lblScore.fontColor = [SKColor whiteColor];
         lblScore.position = CGPointMake(self.size.width / 2, 300);
         lblScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
-        [lblScore setText:[NSString stringWithFormat:@"%d", [GameState sharedInstance].score]];
+        [lblScore setText:[NSString stringWithFormat:@"%ld", [GameState sharedInstance].score]];
         [self addChild:lblScore];
         
         // High Score
@@ -38,7 +38,7 @@
         lblHighScore.fontColor = [SKColor cyanColor];
         lblHighScore.position = CGPointMake(self.size.width / 2, 150);
         lblHighScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
-        [lblHighScore setText:[NSString stringWithFormat:@"High Score: %d", [GameState sharedInstance].highScore]];
+        [lblHighScore setText:[NSString stringWithFormat:@"High Score: %ld", [GameState sharedInstance].highScore]];
         [self addChild:lblHighScore];
         
         // Try again

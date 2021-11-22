@@ -10,6 +10,7 @@
 		B5656B2A274AB31B0056E494 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = B5656B29274AB31B0056E494 /* Player.m */; };
 		B5656B2C274BF0C00056E494 /* Level03.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5656B2B274BF0C00056E494 /* Level03.plist */; };
 		B5656B2E274BFC470056E494 /* Level04.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5656B2D274BFC470056E494 /* Level04.plist */; };
+		B5656B31274C02810056E494 /* GameLevelLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = B5656B30274C02810056E494 /* GameLevelLoader.m */; };
 		B5E1796D1C7D5E1C0000C2C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E1796C1C7D5E1C0000C2C5 /* main.m */; };
 		B5E179701C7D5E1C0000C2C5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E1796F1C7D5E1C0000C2C5 /* AppDelegate.m */; };
 		B5E179731C7D5E1C0000C2C5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5E179721C7D5E1C0000C2C5 /* ViewController.m */; };
@@ -119,6 +120,8 @@
 		B5656B29274AB31B0056E494 /* Player.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		B5656B2B274BF0C00056E494 /* Level03.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Level03.plist; sourceTree = "<group>"; };
 		B5656B2D274BFC470056E494 /* Level04.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Level04.plist; sourceTree = "<group>"; };
+		B5656B2F274C02810056E494 /* GameLevelLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameLevelLoader.h; sourceTree = "<group>"; };
+		B5656B30274C02810056E494 /* GameLevelLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameLevelLoader.m; sourceTree = "<group>"; };
 		B5E179671C7D5E1C0000C2C5 /* SheepJumpEatCoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SheepJumpEatCoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5E1796B1C7D5E1C0000C2C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5E1796C1C7D5E1C0000C2C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -272,6 +275,8 @@
 				B5E179931C7D5ECD0000C2C5 /* GameObjectNode.m */,
 				B5E179941C7D5ECD0000C2C5 /* GameState.h */,
 				B5E179951C7D5ECD0000C2C5 /* GameState.m */,
+				B5656B2F274C02810056E494 /* GameLevelLoader.h */,
+				B5656B30274C02810056E494 /* GameLevelLoader.m */,
 				B5E179961C7D5ECD0000C2C5 /* Level01.plist */,
 				B5E179971C7D5ECD0000C2C5 /* Level02.plist */,
 				B5656B2B274BF0C00056E494 /* Level03.plist */,
@@ -460,16 +465,16 @@
 					};
 					B5E1797F1C7D5E1C0000C2C5 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = T6VV6T753H;
 						TestTargetID = B5E179661C7D5E1C0000C2C5;
 					};
 				};
 			};
 			buildConfigurationList = B5E179621C7D5E1C0000C2C5 /* Build configuration list for PBXProject "SheepJumpEatCoin" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -599,6 +604,7 @@
 				B5E179A91C7D5ECE0000C2C5 /* StarNode.m in Sources */,
 				B5E179701C7D5E1C0000C2C5 /* AppDelegate.m in Sources */,
 				B5E179A71C7D5ECE0000C2C5 /* MyScene.m in Sources */,
+				B5656B31274C02810056E494 /* GameLevelLoader.m in Sources */,
 				B5E1796D1C7D5E1C0000C2C5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -677,7 +683,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -714,7 +720,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -747,6 +753,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = T6VV6T753H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -766,6 +773,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = T6VV6T753H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

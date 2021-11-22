@@ -44,8 +44,8 @@
     
     // Store in user defaults
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[NSNumber numberWithInt:_highScore] forKey:@"highScore"];
-    [defaults setObject:[NSNumber numberWithInt:_stars] forKey:@"stars"];
+    [defaults setObject:[NSNumber numberWithInteger:_highScore] forKey:@"highScore"];
+    [defaults setObject:[NSNumber numberWithInteger:_stars] forKey:@"stars"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
