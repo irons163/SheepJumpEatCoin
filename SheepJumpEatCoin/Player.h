@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property int maxPlayerY; // Max y reached by player
 @property int goalLineY; // Height at which level ends
-@property (readonly) BOOL isDroping;
 @property (nonatomic, assign) uint32_t categoryBitMask;
 @property (nonatomic, assign) uint32_t contactTestBitMask;
 

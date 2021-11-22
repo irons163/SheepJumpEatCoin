@@ -12,6 +12,13 @@ typedef NS_ENUM(int, PlatformType) {
 
 @interface PlatformNode : GameObjectNode
 
-@property (nonatomic, assign) PlatformType platformType;
++ (instancetype)node NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+- (id)initWithType:(PlatformType)type;
+
+@property (nonatomic, assign) PlatformType type;
+@property (nonatomic, assign) uint32_t categoryBitMask;
+@property (nonatomic, assign) uint32_t contactTestBitMask;
 
 @end

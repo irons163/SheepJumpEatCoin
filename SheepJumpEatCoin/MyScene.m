@@ -92,8 +92,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
                 CGFloat y = [platformPoint[@"y"] floatValue];
                 PlatformType type = [platformPoint[@"type"] intValue];
                 
-                PlatformNode *platformNode = [self createPlatformAtPosition:CGPointMake(x + patternX, y + patternY)
-                                                                     ofType:type];
+                PlatformNode *platformNode = [self createPlatformAtPosition:CGPointMake(x + patternX, y + patternY) ofType:type];
                 [_foregroundNode addChild:platformNode];
             }
         }
@@ -121,6 +120,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
         
         // Add the player
         _player = [[Player alloc] init];
+        [_player setPosition:CGPointMake(160.0f, 80.0f)];
         _player.goalLineY = endLevelY;
         _player.categoryBitMask = CollisionCategoryPlayer;
         _player.contactTestBitMask = CollisionCategoryStar | CollisionCategoryPlatform;
@@ -136,13 +136,13 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
         // Stars
         // 1
         SKSpriteNode *star = [SKSpriteNode spriteNodeWithImageNamed:@"Star"];
-        star.position = CGPointMake(25, self.size.height-30);
+        star.position = CGPointMake(25, self.size.height - 30);
         [_hudNode addChild:star];
         // 2
         _lblStars = [SKLabelNode labelNodeWithFontNamed:@"ChalkboardSE-Bold"];
         _lblStars.fontSize = 30;
         _lblStars.fontColor = [SKColor whiteColor];
-        _lblStars.position = CGPointMake(50, self.size.height-40);
+        _lblStars.position = CGPointMake(50, self.size.height - 40);
         _lblStars.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         // 3
         [_lblStars setText:[NSString stringWithFormat:@"X %d", [GameState sharedInstance].stars]];
@@ -153,7 +153,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
         _lblScore = [SKLabelNode labelNodeWithFontNamed:@"ChalkboardSE-Bold"];
         _lblScore.fontSize = 30;
         _lblScore.fontColor = [SKColor whiteColor];
-        _lblScore.position = CGPointMake(self.size.width-20, self.size.height-40);
+        _lblScore.position = CGPointMake(self.size.width - 20, self.size.height - 40);
         _lblScore.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
         // 5
         [_lblScore setText:@"0"];
@@ -247,25 +247,10 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
 
 - (PlatformNode *)createPlatformAtPosition:(CGPoint)position ofType:(PlatformType)type {
     // 1
-    PlatformNode *node = [PlatformNode node];
+    PlatformNode *node = [[PlatformNode alloc] initWithType:type];
     [node setPosition:position];
     [node setName:@"NODE_PLATFORM"];
-    [node setPlatformType:type];
-    
-    // 2
-    SKSpriteNode *sprite;
-    if (type == PLATFORM_BREAK) {
-        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"PlatformBreak"];
-    } else {
-        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Platform"];
-    }
-    [node addChild:sprite];
-    
-    // 3
-    node.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:sprite.size];
-    node.physicsBody.dynamic = NO;
-    node.physicsBody.categoryBitMask = CollisionCategoryPlatform;
-    node.physicsBody.collisionBitMask = 0;
+    node.categoryBitMask = CollisionCategoryPlatform;
     
     return node;
 }
@@ -276,7 +261,7 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     
     // 1
     // Add some branches to the midground
-    for (int i=0; i<10; i++) {
+    for (int i = 0; i < 10; i++) {
         NSString *spriteName;
         // 2
         int r = arc4random() % 2;
@@ -299,13 +284,13 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     
     if (![GameState sharedInstance].started) return;
     
-    [_player updateStatus];
-    
-    if (!_player.isDroping) {
+    if ((int)_player.position.y - _player.maxPlayerY > 0) {
         // 2
         [GameState sharedInstance].score += (int)_player.position.y - _player.maxPlayerY;
         [_lblScore setText:[NSString stringWithFormat:@"%d", [GameState sharedInstance].score]];
     }
+    
+    [_player updateStatus];
     
     // Remove game objects that have passed by
     [_foregroundNode enumerateChildNodesWithName:@"NODE_PLATFORM" usingBlock:^(SKNode *node, BOOL *stop) {
@@ -317,8 +302,8 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     
     // Calculate player y offset
     if (_player.position.y > 200.0f) {
-        _backgroundNode.position = CGPointMake(0.0f, -((_player.position.y - 200.0f)/10));
-        _midgroundNode.position = CGPointMake(0.0f, -((_player.position.y - 200.0f)/4));
+        _backgroundNode.position = CGPointMake(0.0f, -((_player.position.y - 200.0f) / 10));
+        _midgroundNode.position = CGPointMake(0.0f, -((_player.position.y - 200.0f) / 4));
         _foregroundNode.position = CGPointMake(0.0f, -(_player.position.y - 200.0f));
     }
     

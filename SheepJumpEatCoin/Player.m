@@ -8,6 +8,12 @@
 
 #import "Player.h"
 
+@interface Player()
+
+@property (readonly) BOOL isJumping;
+
+@end
+
 @implementation Player
 
 - (instancetype)init {
@@ -20,51 +26,35 @@
 - (void)setup {
     _maxPlayerY = 80;
     
-//    SKNode *playerNode = [SKNode node];
-    [self setPosition:CGPointMake(160.0f, 80.0f)];
-    
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"sheep_jump2"];
     sprite.size = CGSizeMake(50, 50);
     [self addChild:sprite];
     
-    // 1
-    self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width/2];
-    // 2
+    self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width / 2];
     self.physicsBody.dynamic = NO;
-    // 3
     self.physicsBody.allowsRotation = NO;
-    // 4
     self.physicsBody.restitution = 1.0f;
     self.physicsBody.friction = 0.0f;
     self.physicsBody.angularDamping = 0.0f;
     self.physicsBody.linearDamping = 0.0f;
     
-    // 1
     self.physicsBody.usesPreciseCollisionDetection = YES;
-    // 2
-//    self.physicsBody.categoryBitMask = CollisionCategoryPlayer;
-    // 3
     self.physicsBody.collisionBitMask = 0;
-    // 4
-//    playerNode.physicsBody.contactTestBitMask = CollisionCategoryStar | CollisionCategoryPlatform;
-    
-//    return self;
 }
 
 - (void)updateStatus {
-    // New max height ?
     if ((int)self.position.y > self.maxPlayerY) {
         self.maxPlayerY = (int)self.position.y;
     }
     
-    if (self.position.y < (_maxPlayerY)) {
-        if (!_isDroping) {
-            _isDroping = true;
+    if (self.physicsBody.velocity.dy < 0) {
+        if (_isJumping) {
+            _isJumping = false;
             ((SKSpriteNode *)self.children.firstObject).texture = [SKTexture textureWithImageNamed:@"sheep_jump3"];
         }
     } else {
-        if (_isDroping) {
-            _isDroping = false;
+        if (!_isJumping) {
+            _isJumping = true;
             ((SKSpriteNode *)self.children.firstObject).texture = [SKTexture textureWithImageNamed:@"sheep_jump1"];
         }
     }
@@ -75,10 +65,7 @@
 }
 
 - (void)startjumping {
-    // 3
-    // Start the player by putting them into the physics simulation
     self.physicsBody.dynamic = YES;
-    // 4
     [self.physicsBody applyImpulse:CGVectorMake(0.0f, 20.0f)];
 }
 

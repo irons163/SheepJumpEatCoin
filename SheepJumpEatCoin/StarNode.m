@@ -26,11 +26,8 @@
 }
 
 - (void)setup {
-    // Sound for when we collect a Star
     _starSound = [SKAction playSoundFileNamed:@"StarPing.wav" waitForCompletion:NO];
     
-    // 2
-//    [self setStarType:_type];
     SKSpriteNode *sprite;
     if (_type == STAR_SPECIAL) {
         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"StarSpecial"];
@@ -39,15 +36,9 @@
     }
     [self addChild:sprite];
     
-    // 3
     self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width/2];
-    
-    // 4
     self.physicsBody.dynamic = NO;
-    
-//    self.physicsBody.categoryBitMask = CollisionCategoryStar;
     self.physicsBody.collisionBitMask = 0;
-    self.physicsBody.contactTestBitMask = 0;
 }
 
 - (BOOL)collisionWithPlayer:(SKNode *)player {
