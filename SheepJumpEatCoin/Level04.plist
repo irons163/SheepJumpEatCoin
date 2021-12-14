@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>EndY</key>
-	<real>9200</real>
+	<real>8500</real>
 	<key>Stars</key>
 	<dict>
 		<key>Patterns</key>
@@ -565,40 +565,40 @@
 				<key>x</key>
 				<integer>200</integer>
 				<key>y</key>
-				<real>6800</real>
+				<real>6900</real>
 			</dict>
-            <dict>
-                <key>pattern</key>
-                <string>DoubleLineRight</string>
-                <key>x</key>
-                <integer>280</integer>
-                <key>y</key>
-                <real>7400</real>
-            </dict>
-            <dict>
-                <key>pattern</key>
-                <string>Diamond</string>
-                <key>x</key>
-                <integer>200</integer>
-                <key>y</key>
-                <real>8000</real>
-            </dict>
-            <dict>
-                <key>pattern</key>
-                <string>Cross</string>
-                <key>x</key>
-                <integer>140</integer>
-                <key>y</key>
-                <integer>8400</integer>
-            </dict>
-            <dict>
-                <key>pattern</key>
-                <string>Cross</string>
-                <key>x</key>
-                <integer>80</integer>
-                <key>y</key>
-                <integer>8800</integer>
-            </dict>
+			<dict>
+				<key>pattern</key>
+				<string>DoubleLineRight</string>
+				<key>x</key>
+				<integer>280</integer>
+				<key>y</key>
+				<real>7500</real>
+			</dict>
+			<dict>
+				<key>pattern</key>
+				<string>Diamond</string>
+				<key>x</key>
+				<integer>200</integer>
+				<key>y</key>
+				<real>8000</real>
+			</dict>
+			<dict>
+				<key>pattern</key>
+				<string>Cross</string>
+				<key>x</key>
+				<integer>280</integer>
+				<key>y</key>
+				<real>8200</real>
+			</dict>
+			<dict>
+				<key>pattern</key>
+				<string>Cross</string>
+				<key>x</key>
+				<integer>80</integer>
+				<key>y</key>
+				<real>8300</real>
+			</dict>
 		</array>
 	</dict>
 	<key>Platforms</key>
@@ -844,38 +844,30 @@
 				<key>y</key>
 				<integer>4960</integer>
 			</dict>
-            <dict>
-                <key>pattern</key>
-                <string>DoubleBreak</string>
-                <key>x</key>
-                <integer>70</integer>
-                <key>y</key>
-                <integer>5960</integer>
-            </dict>
-            <dict>
-                <key>pattern</key>
-                <string>DoubleBreak</string>
-                <key>x</key>
-                <integer>270</integer>
-                <key>y</key>
-                <integer>6960</integer>
-            </dict>
-            <dict>
-                <key>pattern</key>
-                <string>DoubleBreak</string>
-                <key>x</key>
-                <integer>100</integer>
-                <key>y</key>
-                <integer>7960</integer>
-            </dict>
-            <dict>
-                <key>pattern</key>
-                <string>DoubleBreak</string>
-                <key>x</key>
-                <integer>200</integer>
-                <key>y</key>
-                <integer>8560</integer>
-            </dict>
+			<dict>
+				<key>pattern</key>
+				<string>DoubleBreak</string>
+				<key>x</key>
+				<integer>70</integer>
+				<key>y</key>
+				<integer>5960</integer>
+			</dict>
+			<dict>
+				<key>pattern</key>
+				<string>DoubleBreak</string>
+				<key>x</key>
+				<integer>270</integer>
+				<key>y</key>
+				<integer>6960</integer>
+			</dict>
+			<dict>
+				<key>pattern</key>
+				<string>DoubleBreak</string>
+				<key>x</key>
+				<integer>100</integer>
+				<key>y</key>
+				<integer>7960</integer>
+			</dict>
 		</array>
 	</dict>
 </dict>

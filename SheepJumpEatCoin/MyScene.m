@@ -73,11 +73,11 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
         GameLevelLoader *levelLoader = [[GameLevelLoader alloc] init];
         levelLoader.platformInfoBlock = ^(CGPoint position, NSInteger type) {
             PlatformNode *platformNode = [self createPlatformAtPosition:position ofType:(PlatformType)type];
-            [_foregroundNode addChild:platformNode];
+            [self->_foregroundNode addChild:platformNode];
         };
         levelLoader.starInfoBlock = ^(CGPoint position, NSInteger type) {
             StarNode *starNode = [self createStarAtPosition:position ofType:(StarType)type];
-            [_foregroundNode addChild:starNode];
+            [self->_foregroundNode addChild:starNode];
         };
         [levelLoader load];
         
@@ -122,7 +122,8 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
         [_motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
                                              withHandler:^(CMAccelerometerData  *accelerometerData, NSError *error) {
             CMAcceleration acceleration = accelerometerData.acceleration;
-            _xAcceleration = (acceleration.x * 0.75) + (_xAcceleration * 0.25);
+            self->_xAcceleration = (acceleration.x * 0.75) + (self->_xAcceleration * 0.25);
+            self->_player.xScale = self->_xAcceleration > 0 ? -1 : 1;
         }];
     }
     return self;
@@ -206,7 +207,10 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
         }
         
         SKSpriteNode *branchNode = [SKSpriteNode spriteNodeWithImageNamed:spriteName];
-        branchNode.position = CGPointMake(160.0f, 500.0f * i);
+        branchNode.position = CGPointMake(self.size.width / 2, 500.0f * i);
+        CGFloat scale =  self.size.width / branchNode.size.width;
+        CGSize newSize = CGSizeMake(self.size.width, branchNode.size.height * scale);
+        branchNode.size = newSize;
         [midgroundNode addChild:branchNode];
     }
     
@@ -227,10 +231,10 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     
     // Remove game objects that have passed by
     [_foregroundNode enumerateChildNodesWithName:@"NODE_PLATFORM" usingBlock:^(SKNode *node, BOOL *stop) {
-        [((PlatformNode *)node) checkNodeRemoval:_player.position.y];
+        [((PlatformNode *)node) checkNodeRemoval:self->_player.position.y];
     }];
     [_foregroundNode enumerateChildNodesWithName:@"NODE_STAR" usingBlock:^(SKNode *node, BOOL *stop) {
-        [((StarNode *)node) checkNodeRemoval:_player.position.y];
+        [((StarNode *)node) checkNodeRemoval:self->_player.position.y];
     }];
     
     // Calculate player y offset

@@ -12,7 +12,7 @@
 
 - (void)load {
     // Load the level
-    NSString *levelPlist = [[NSBundle mainBundle] pathForResource: @"Level02" ofType: @"plist"];
+    NSString *levelPlist = [[NSBundle mainBundle] pathForResource: @"Level04" ofType: @"plist"];
     NSDictionary *levelData = [NSDictionary dictionaryWithContentsOfFile:levelPlist];
     
     // Height at which the player ends the level
