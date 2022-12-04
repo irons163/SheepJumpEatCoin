@@ -246,6 +246,10 @@ typedef NS_OPTIONS(uint32_t, CollisionCategory) {
     
     // Check if we've finished the level
     if (_player.arrivedGoalLine) {
+        [GameState sharedInstance].currentLevel += 1;
+        if ([GameState sharedInstance].currentLevel > 4) {
+            [GameState sharedInstance].currentLevel = 1;
+        }
         [self endGame];
     }
     

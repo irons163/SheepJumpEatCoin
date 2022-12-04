@@ -10,6 +10,7 @@
 @property (nonatomic, assign) NSInteger score;
 @property (nonatomic, assign) NSInteger highScore;
 @property (nonatomic, assign) NSInteger stars;
+@property (nonatomic, assign) NSInteger currentLevel;
 
 @property (assign) BOOL started;
 

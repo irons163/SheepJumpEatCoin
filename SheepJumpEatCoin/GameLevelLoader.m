@@ -7,12 +7,14 @@
 //
 
 #import "GameLevelLoader.h"
+#import "GameState.h"
 
 @implementation GameLevelLoader
 
 - (void)load {
     // Load the level
-    NSString *levelPlist = [[NSBundle mainBundle] pathForResource: @"Level04" ofType: @"plist"];
+    NSInteger currentLevel = [GameState sharedInstance].currentLevel;
+    NSString *levelPlist = [[NSBundle mainBundle] pathForResource: [NSString stringWithFormat:@"Level0%ld", currentLevel] ofType: @"plist"];
     NSDictionary *levelData = [NSDictionary dictionaryWithContentsOfFile:levelPlist];
     
     // Height at which the player ends the level

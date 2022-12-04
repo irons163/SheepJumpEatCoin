@@ -23,6 +23,7 @@
         _score = 0;
         _highScore = 0;
         _stars = 0;
+        _currentLevel = 6;
         
         // Load game state
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -46,6 +47,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[NSNumber numberWithInteger:_highScore] forKey:@"highScore"];
     [defaults setObject:[NSNumber numberWithInteger:_stars] forKey:@"stars"];
+    [defaults setObject:[NSNumber numberWithInteger:_currentLevel] forKey:@"currentLevel"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
